@@ -1,17 +1,1 @@
-<app-player-detail [player]="selectedPlayer"></app-player-detail>
-
-<ul class="players">
-    <li *ngFor="let player of players"
-        [class.selected]="player === selectedPlayer"
-        (click)="onSelect(player)">
-        <span class="badge">{{ player.id }}</span> {{ player.name }}
-    </li>
-</ul>
-
-<div class="gameboard"
-     (panup)="swipe($event)"
-     (panleft)="swipe($event)"
-     (panright)="swipe($event)"
-     (pandown)="swipe($event)">
-    ICI
-</div>
+<app-board></app-board>

@@ -27,8 +27,4 @@ export class GameComponent implements OnInit {
     this.selectedPlayer = player;
   }
 
-  swipe(action) {
-    console.log(action);
-  }
-
 }

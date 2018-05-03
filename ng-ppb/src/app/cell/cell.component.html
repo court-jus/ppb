@@ -1,0 +1,9 @@
+<div
+     class="cell"
+     [ngClass]="{'start': cell.type === 1,
+                 'end': cell.type === 2,
+                 'mine': cell.type === 3,
+                 'hollow': status !== 0,
+                 'visited': cell.visited}">
+  &nbsp;
+</div>

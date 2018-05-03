@@ -1,0 +1,35 @@
+<div class="help">
+  <div [ngSwitch]="status">
+    <span *ngSwitchCase="0">
+      Mémorisez l'emplacement des obstacles.
+    </span>
+    <span *ngSwitchCase="1">
+      Appuyez sur le poisson.
+    </span>
+    <span *ngSwitchCase="2">
+      Déplacez le poisson jusqu'à la case verte,
+      sans toucher d'obstacle.
+    </span>
+    <span *ngSwitchCase="3">
+      Objectif atteint.
+    </span>
+    <span *ngSwitchCase="4">
+      Erreur.
+    </span>
+  </div>
+</div>
+<div class="actions">
+  <button (click)="newGame()">Nouvelle partie</button>
+</div>
+<div class="gameboard"
+     [ngClass]="{'init': status === 0,
+                 'ready': status === 1,
+                 'started': status === 2,
+                 'finished': status === 3,
+                 'failed': status === 4}">
+  <app-cell *ngFor="let cell of cells"
+            [cell]="cell" [status]="status"
+            (tap)="click(cell)">
+  </app-cell>
+</div>
+<div>{{ debug }} - {{ curpos }}</div>

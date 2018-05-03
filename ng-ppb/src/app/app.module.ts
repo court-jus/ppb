@@ -9,6 +9,9 @@ import { PlayerService } from './player.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { BoardComponent } from './board/board.component';
+import { PlayersComponent } from './players/players.component';
+import { CellComponent } from './cell/cell.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { AppRoutingModule } from './/app-routing.module';
     AppComponent,
     GameComponent,
     PlayerDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    BoardComponent,
+    PlayersComponent,
+    CellComponent
   ],
   imports: [
     BrowserModule,

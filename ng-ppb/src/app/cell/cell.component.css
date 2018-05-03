@@ -1,0 +1,25 @@
+.cell {
+  width: 73px;
+  height: 73px;
+  border: 1px solid black;
+}
+
+.cell.start.hollow {
+  background-color: white;
+}
+
+.cell.end.hollow {
+  background-color: green;
+}
+
+.cell.mine.hollow {
+  background-color: inherit;
+}
+
+.cell.mine {
+  background-color: red;
+}
+
+.cell.visited {
+  border-color: blue;
+}
