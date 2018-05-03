@@ -1,3 +1,18 @@
+<div class="actions">
+  <button (click)="newGame()">Nouvelle partie</button>
+</div>
+<div class="gameboard"
+     [ngClass]="{'init': status === 0,
+                 'ready': status === 1,
+                 'started': status === 2,
+                 'finished': status === 3,
+                 'failed': status === 4}">
+  <app-cell *ngFor="let cell of cells"
+            [cell]="cell" [status]="status"
+            (tap)="click(cell)">
+  </app-cell>
+</div>
+<!-- <div>{{ debug }} - {{ curpos }}</div> -->
 <div class="help">
   <div [ngSwitch]="status">
     <span *ngSwitchCase="0">
@@ -19,18 +34,3 @@
     </span>
   </div>
 </div>
-<div class="actions">
-  <button (click)="newGame()">Nouvelle partie</button>
-</div>
-<div class="gameboard"
-     [ngClass]="{'init': status === 0,
-                 'ready': status === 1,
-                 'started': status === 2,
-                 'finished': status === 3,
-                 'failed': status === 4}">
-  <app-cell *ngFor="let cell of cells"
-            [cell]="cell" [status]="status"
-            (tap)="click(cell)">
-  </app-cell>
-</div>
-<div>{{ debug }} - {{ curpos }}</div>
