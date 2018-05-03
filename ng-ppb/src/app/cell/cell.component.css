@@ -5,7 +5,10 @@
 }
 
 .cell.start.hollow {
-  background-color: white;
+  background-image: url('../../assets/dory.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
 }
 
 .cell.end.hollow {
