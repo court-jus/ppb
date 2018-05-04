@@ -70,12 +70,20 @@ export class BoardComponent implements OnInit {
     if (typeof(path) === "undefined") {
       // if we did not find a path within 1000 tries,
       // start over.
+      console.error("Could not generate path");
       this.newGame(this.level);
       return;
     }
     // Put mines but not on the path
     let minecount = Math.round((this.level - 1) / 1.1) + 3;
-    while(minecount > 0) {
+    if (this.cells.length - path.length < minecount) {
+      console.error("I won't be able to place mines");
+      this.newGame(this.level);
+      return;
+    }
+
+    let steps: number = 1000;
+    while(minecount > 0 && steps > 0) {
       let rand_cell = this.choice(this.cells);
       if (
         (path.indexOf(rand_cell.id) === -1) &&
@@ -85,7 +93,14 @@ export class BoardComponent implements OnInit {
       ) {
         rand_cell.type = 3;
         minecount -= 1;
+      } else {
+        steps -= 1;
       }
+    }
+    if (minecount > 0) {
+      console.error("Could not place mines", path, minecount);
+      this.newGame(this.level);
+      return;
     }
     this.status = 0;
     window.setTimeout(() => {
