@@ -74,13 +74,14 @@ export class BoardComponent implements OnInit {
       return;
     }
     // Put mines but not on the path
-    let minecount = Math.round((this.level - 1) / 1.2) + 3;
+    let minecount = Math.round((this.level - 1) / 1.1) + 3;
     while(minecount > 0) {
       let rand_cell = this.choice(this.cells);
       if (
         (path.indexOf(rand_cell.id) === -1) &&
         (rand_cell.id !== where_to_start) &&
-        (rand_cell.id !== where_to_end)
+        (rand_cell.id !== where_to_end) &&
+        (rand_cell.type !== 3)
       ) {
         rand_cell.type = 3;
         minecount -= 1;
