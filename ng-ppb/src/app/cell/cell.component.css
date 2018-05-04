@@ -1,7 +1,6 @@
 .cell {
-  width: 73px;
-  height: 73px;
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .cell.start.hollow {

@@ -6,8 +6,9 @@ import { PlayersComponent } from './players/players.component';
 
 const routes: Routes = [
   { path: 'players', component: PlayersComponent },
-  { path: 'game', component: GameComponent },
-  { path: '', redirectTo: '/game', pathMatch: 'full' }
+  { path: 'game/:level', component: GameComponent },
+  { path: 'game', redirectTo: '/game/1', pathMatch: 'full' },
+  { path: '', redirectTo: '/game/1', pathMatch: 'full' }
 ];
 
 @NgModule({

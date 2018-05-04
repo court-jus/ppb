@@ -1,5 +1,7 @@
 <div
      class="cell"
+     [style.width]="width + 'px'"
+     [style.height]="height + 'px'"
      [ngClass]="{'start': cell.type === 1,
                  'end': cell.type === 2,
                  'mine': cell.type === 3,

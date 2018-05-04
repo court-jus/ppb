@@ -9,6 +9,8 @@
                  'failed': status === 4}">
   <app-cell *ngFor="let cell of cells"
             [cell]="cell" [status]="status"
+            [width]="300 / width"
+            [height]="300 / height"
             (tap)="click(cell)">
   </app-cell>
 </div>

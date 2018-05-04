@@ -13,6 +13,7 @@ export class CellComponent implements OnInit {
   @Input() index: number;
   @Input() curpos: number;
   @Input() width: number;
+  @Input() height: number;
 
   constructor() { }
 

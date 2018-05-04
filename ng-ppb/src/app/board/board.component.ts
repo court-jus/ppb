@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Cell } from '../cell';
 
 @Component({
@@ -8,9 +8,9 @@ import { Cell } from '../cell';
 })
 export class BoardComponent implements OnInit {
 
-  level: number = 1;
-  width: number = 4;
-  height: number = 4;
+  @Input() level: number;
+  width: number;
+  height: number;
   cells: Cell[];
   curpos: number;
   debug: string;
@@ -32,6 +32,8 @@ export class BoardComponent implements OnInit {
     let side_to_start: number = this.randint(2);
     let where_to_start: number;
     let where_to_end: number;
+    this.width = (this.level - 1) * 2 + 4;
+    this.height = (this.level - 1) * 2 + 4;
     if (side_to_start === 0) {
       // Start on top
       where_to_start = this.randint(this.width);
