@@ -4,7 +4,7 @@
 }
 
 .cell.start.hollow {
-  background-color: white;
+  background-color: lightgray;
 }
 
 .cell.lastvisited.hollow {
@@ -15,7 +15,7 @@
 }
 
 .cell.end.hollow {
-  background-color: green;
+  background-color: darkgreen;
 }
 
 .cell.mine.hollow {
@@ -23,11 +23,15 @@
 }
 
 .cell.mine {
-  background-color: red;
+  background-color: darkred;
 }
 
 .cell.visited {
-  border-color: blue;
+  border-color: darkblue;
+  background-image: url('../../assets/bubbles.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
 }
 
 .cell.mine.reveal {
