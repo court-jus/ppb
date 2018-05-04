@@ -37,8 +37,8 @@ export class BoardComponent implements OnInit {
     let where_to_start: number;
     let where_to_end: number;
     if (level) { this.level = level; }
-    this.width = (this.level - 1) * 2 + 4;
-    this.height = (this.level - 1) * 2 + 4;
+    this.width = Math.round((this.level - 1) / 5) + 4;
+    this.height = Math.round((this.level - 1) / 3) + 4;
     if (side_to_start === 0) {
       // Start on top
       where_to_start = this.randint(this.width);
@@ -74,10 +74,14 @@ export class BoardComponent implements OnInit {
       return;
     }
     // Put mines but not on the path
-    let minecount = 3;
+    let minecount = Math.round((this.level - 1) / 1.2) + 3;
     while(minecount > 0) {
       let rand_cell = this.choice(this.cells);
-      if (path.indexOf(rand_cell.id) === -1 && rand_cell.id !== where_to_start && rand_cell.id !== where_to_end) {
+      if (
+        (path.indexOf(rand_cell.id) === -1) &&
+        (rand_cell.id !== where_to_start) &&
+        (rand_cell.id !== where_to_end)
+      ) {
         rand_cell.type = 3;
         minecount -= 1;
       }
@@ -160,8 +164,12 @@ export class BoardComponent implements OnInit {
       } else if (cell.type === 3) {
         this.status = 4;
         window.setTimeout(() => {
-          this.newGame(this.level);
-        }, 2000);
+          if (this.level < 2) {
+            this.newGame(this.level);
+          } else {
+            this.router.navigate(['game', this.level - 1]);
+          }
+        }, 2500);
       }
     }
   }

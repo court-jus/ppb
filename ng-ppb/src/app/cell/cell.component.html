@@ -5,6 +5,7 @@
      [ngClass]="{'start': cell.type === 1,
                  'end': cell.type === 2,
                  'mine': cell.type === 3,
+                 'failed': status === 4,
                  'hollow': status !== 0,
                  'lastvisited': cell.lastvisited,
                  'visited': cell.visited}">

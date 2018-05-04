@@ -29,3 +29,7 @@
 .cell.visited {
   border-color: blue;
 }
+
+.cell.mine.failed {
+  background-color: pink !important;
+}
