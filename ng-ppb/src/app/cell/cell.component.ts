@@ -8,7 +8,7 @@ import { Cell } from '../cell';
 })
 export class CellComponent implements OnInit {
 
-  @Input() cell: number;
+  @Input() cell: Cell;
   @Input() status: number;
   @Input() index: number;
   @Input() curpos: number;
