@@ -1,0 +1,13 @@
+.help {
+  font-family: serif;
+  width: 90%;
+  text-align: justify;
+  margin: auto;
+}
+
+.help a,
+.help a:visited,
+.help a:hover,
+{
+  color: white;
+}

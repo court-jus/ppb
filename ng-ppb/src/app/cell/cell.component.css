@@ -30,6 +30,6 @@
   border-color: blue;
 }
 
-.cell.mine.failed {
+.cell.mine.reveal {
   background-color: pink !important;
 }

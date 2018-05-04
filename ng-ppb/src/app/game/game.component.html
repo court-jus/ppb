@@ -1,7 +1,7 @@
 <div class="actions">
-  <a routerLink="/game/{{ this.level - 1}}">&lt;</a>
+  <button routerLink="/game/{{ this.level - 1}}">&lt;</button>
   Niveau {{ this.level }}
   <button (click)="newGame()">Nouvelle partie</button>
-  <a routerLink="/game/{{ this.level + 1}}">&gt;</a>
+  <button routerLink="/game/{{ this.level + 1}}">&gt;</button>
 </div>
 <app-board [level]="level"></app-board>

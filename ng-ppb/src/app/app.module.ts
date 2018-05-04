@@ -12,6 +12,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BoardComponent } from './board/board.component';
 import { PlayersComponent } from './players/players.component';
 import { CellComponent } from './cell/cell.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CellComponent } from './cell/cell.component';
     MessagesComponent,
     BoardComponent,
     PlayersComponent,
-    CellComponent
+    CellComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
