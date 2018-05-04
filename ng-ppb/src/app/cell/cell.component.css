@@ -4,6 +4,10 @@
 }
 
 .cell.start.hollow {
+  background-color: white;
+}
+
+.cell.lastvisited.hollow {
   background-image: url('../../assets/dory.png');
   background-position: center;
   background-repeat: no-repeat;

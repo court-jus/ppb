@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Cell } from '../cell';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -16,8 +17,11 @@ export class BoardComponent implements OnInit {
   debug: string;
   status: number;
 
-  constructor() {
-    this.newGame();
+  constructor(private router: Router) {
+  }
+
+  ngOnInit() {
+    this.newGame(this.level);
   }
 
   choice(list: any[]): any {
@@ -28,10 +32,11 @@ export class BoardComponent implements OnInit {
     return Math.floor(Math.random() * max);
   }
 
-  newGame() {
+  newGame(level) {
     let side_to_start: number = this.randint(2);
     let where_to_start: number;
     let where_to_end: number;
+    if (level) { this.level = level; }
     this.width = (this.level - 1) * 2 + 4;
     this.height = (this.level - 1) * 2 + 4;
     if (side_to_start === 0) {
@@ -44,6 +49,7 @@ export class BoardComponent implements OnInit {
       where_to_end = ((this.randint(this.height) + 1) * this.width) - 1;
     }
 
+    // Create empty board
     this.cells = [];
     for(let row = 0; row < this.height; row++) {
       for(let col = 0; col < this.width; col++) {
@@ -52,10 +58,28 @@ export class BoardComponent implements OnInit {
         cell.id = idx;
         if (idx === where_to_start) {
           cell.type = 1;
+          cell.lastvisited = true;
         } else if (idx === where_to_end) {
           cell.type = 2;
         }
         this.cells[idx] = cell;
+      }
+    }
+    // Find a path from start to end
+    let path = this.findPath(where_to_start, where_to_end);
+    if (typeof(path) === "undefined") {
+      // if we did not find a path within 1000 tries,
+      // start over.
+      this.newGame(this.level);
+      return;
+    }
+    // Put mines but not on the path
+    let minecount = 3;
+    while(minecount > 0) {
+      let rand_cell = this.choice(this.cells);
+      if (path.indexOf(rand_cell.id) === -1 && rand_cell.id !== where_to_start && rand_cell.id !== where_to_end) {
+        rand_cell.type = 3;
+        minecount -= 1;
       }
     }
     this.status = 0;
@@ -64,17 +88,57 @@ export class BoardComponent implements OnInit {
     }, 1500);
   }
 
-  ngOnInit() {
+  findPath(start: number, end: number) {
+    let tree = {};
+    let path: number[] = [];
+    let blacklist: number[] = [];
+    let steps: number = 1000;
+    for(let row = 0; row < this.height; row++) {
+      for(let col = 0; col < this.width; col++) {
+        let idx = row * this.width + col;
+        tree[idx] = [];
+        if (row > 0) { tree[idx].push(idx - this.width); }
+        if (col > 0) { tree[idx].push(idx - 1); }
+        if (row < this.height-1) { tree[idx].push(idx + this.width); }
+        if (col < this.width-1) { tree[idx].push(idx + 1); }
+      }
+    }
+    path.push(start);
+    while (steps > 0) {
+      let last = path[path.length-1];
+      let choices = tree[last];
+      if (choices.indexOf(end) !== -1) {
+        path.push(end);
+        return path;
+      } else {
+        let reduced = [];
+        for (let choice of choices) {
+          if (path.indexOf(choice) === -1) {
+            reduced.push(choice);
+          }
+        }
+        let next = this.choice(reduced);
+        if (typeof(next) === "undefined") {
+          path = path.slice(0, path.length-1);
+        } else {
+          path.push(next);
+        }
+      }
+
+      steps -= 1;
+    }
   }
 
   click(cell: Cell) {
     let index = cell.id;
-    console.log(cell, index, this.curpos, this.width, this.status, this.status === 1, cell.type, cell.type=== 1);
     if ((this.status === 1) && (cell.type === 1)) {
-    console.log("A");
       this.status = 2;
       this.curpos = index;
       cell.visited = true;
+      for(let cel of this.cells) {
+        cel.lastvisited = false;
+      }
+      cell.lastvisited = true;
     } else if (
       (this.status === 2) &&
       ((index === this.curpos + this.width) ||
@@ -82,15 +146,22 @@ export class BoardComponent implements OnInit {
        (index === this.curpos + 1) ||
        (index === this.curpos - 1))
     ) {
-    console.log("B");
       this.curpos = index;
       cell.visited = true;
+      for(let cel of this.cells) {
+        cel.lastvisited = false;
+      }
+      cell.lastvisited = true;
       if (cell.type === 2) {
-    console.log("C");
         this.status = 3;
+        window.setTimeout(() => {
+          this.router.navigate(['game', this.level + 1]);
+        }, 2000);
       } else if (cell.type === 3) {
-    console.log("D");
         this.status = 4;
+        window.setTimeout(() => {
+          this.newGame(this.level);
+        }, 2000);
       }
     }
   }
