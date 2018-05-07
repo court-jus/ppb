@@ -3,6 +3,7 @@
   width: 90%;
   text-align: justify;
   margin: auto;
+  max-width: 300px;
 }
 
 .help a,

@@ -186,7 +186,7 @@ export class BoardComponent implements OnInit {
         }, 2000);
       } else if (cell.type === 3) {
         this.status = 4;
-	this.stars -= 2;
+	this.stars -= 1;
 	if (this.stars < 0) {
 	  this.stars = 0;
 	}

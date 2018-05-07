@@ -13,3 +13,6 @@
 .stars .lit {
     color: yellow;
 }
+.help {
+    max-width: 300px;
+}
