@@ -5,3 +5,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.stars {
+    text-align: center;
+    font-size: 2em;
+}
+.stars .lit {
+    color: yellow;
+}

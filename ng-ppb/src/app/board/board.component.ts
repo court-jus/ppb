@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class BoardComponent implements OnInit {
 
   @Input() level: number;
+  stars: number = 0;
   width: number;
   height: number;
   cells: Cell[];
@@ -174,15 +175,26 @@ export class BoardComponent implements OnInit {
       cell.lastvisited = true;
       if (cell.type === 2) {
         this.status = 3;
+	this.stars += 1;
         window.setTimeout(() => {
-          this.router.navigate(['game', this.level + 1]);
+	  if (this.stars === 3) {
+	    this.stars = 0;
+	    this.router.navigate(['game', this.level + 1]);
+          } else {
+	    this.newGame(this.level);
+	  }
         }, 2000);
       } else if (cell.type === 3) {
         this.status = 4;
+	this.stars -= 2;
+	if (this.stars < 0) {
+	  this.stars = 0;
+	}
         window.setTimeout(() => {
-          if (this.level < 2) {
+	  if (this.stars > 0 || this.level < 2) {
             this.newGame(this.level);
           } else {
+	    this.stars = 0;
             this.router.navigate(['game', this.level - 1]);
           }
         }, 2500);

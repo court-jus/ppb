@@ -1,6 +1,6 @@
+<h2>Niveau {{ this.level }}</h2>
 <div class="actions">
   <button routerLink="/game/{{ this.level - 1}}">&lt;</button>
-  Niveau {{ this.level }}
   <button (click)="newGame()">Nouvelle partie</button>
   <button routerLink="/game/{{ this.level + 1}}">&gt;</button>
 </div>

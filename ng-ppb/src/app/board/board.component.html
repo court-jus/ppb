@@ -1,3 +1,11 @@
+<div class="stars">
+  <span class="star"
+	[ngClass]="{'lit': this.stars > 0}">★</span>
+  <span class="star"
+	[ngClass]="{'lit': this.stars > 1}">★</span>
+  <span class="star"
+	[ngClass]="{'lit': this.stars > 2}">★</span>
+</div>
 <div class="gameboard"
      [ngClass]="{'init': status === 0,
                  'ready': status === 1,
